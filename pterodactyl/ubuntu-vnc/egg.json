@@ -1,0 +1,77 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v1",
+        "update_url": null
+    },
+    "exported_at": "2021-09-07T14:21:49+00:00",
+    "name": "ubuntu-vnc",
+    "author": "robin@robinsch.net",
+    "description": "An ubuntu vnc server with gnome, kde plasma, lxde and xfce pre-installed. Note: You MUST build the image yourself on the node using https://github.com/Robin-floss/docker-images, then go into pterodactyl/ubuntu-vnc and run the build.sh file (see https://github.com/Robin-floss/docker-images/issues/1)!",
+    "features": null,
+    "images": [
+        "ubuntu-vnc:pterodactyl"
+    ],
+    "file_denylist": [],
+    "startup": "x11vnc -forever -create -passwd {{VNC_PASSWORD}} -rfbport {{SERVER_PORT}}",
+    "config": {
+        "files": "{}",
+        "startup": "{\r\n    \"done\": \"The VNC desktop is: \"\r\n}",
+        "logs": "{}",
+        "stop": "^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#! \/bin\/bash\r\nexit 1",
+            "container": "ubuntu:20.04",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Password",
+            "description": "The VNC password",
+            "env_variable": "VNC_PASSWORD",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:128"
+        },
+        {
+            "name": "gnome",
+            "description": "The command to run to start gnome",
+            "env_variable": "DE_GNOME",
+            "default_value": "gnome-session",
+            "user_viewable": true,
+            "user_editable": false,
+            "rules": "required|string"
+        },
+        {
+            "name": "kde plasma",
+            "description": "The command to run to start kde plasma",
+            "env_variable": "DE_KDE",
+            "default_value": "plasmashell",
+            "user_viewable": true,
+            "user_editable": false,
+            "rules": "required|string"
+        },
+        {
+            "name": "lxde",
+            "description": "The command to run to start lxde",
+            "env_variable": "DE_LXDE",
+            "default_value": "startlxde",
+            "user_viewable": true,
+            "user_editable": false,
+            "rules": "required|string"
+        },
+        {
+            "name": "xfce",
+            "description": "The command to run to start xfce",
+            "env_variable": "DE_XFCE",
+            "default_value": "startxfce4",
+            "user_viewable": true,
+            "user_editable": false,
+            "rules": "required|string"
+        }
+    ]
+}
